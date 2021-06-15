@@ -4,8 +4,6 @@
 <head>
     <title>DevExtreme jQuery Example</title>
 
-    <link rel="stylesheet" type="text/css" href="artifacts/css/dx.light.css"/>
-
     <script type="text/javascript" src="artifacts/js/jquery.js"></script>
 
     <script type="text/javascript" src="artifacts/js/angular.js"></script>
@@ -29,72 +27,96 @@
 </head>
 
 <body ng-app="DemoApp">
+
     <div ng-controller="DemoController">
-        <div dx-data-grid="dataGridOptions"></div>
-        <div dx-button="buttonOptions"></div>
+        <link rel="stylesheet" type="text/css" data-ng-href="{{ currentTheme.css }}"/>
+        <div dx-select-box="selectOptions"></div>
+        <div dx-data-grid="gridOptions"></div>
+        <div dx-button="buttonOptions"></div><br>
+        Disabled button with icon:
+        <div dx-button="buttonOptionsIcons"></div>
     </div>
 
     <script>
         var DemoApp = angular.module('DemoApp', ['dx']);
 
         DemoApp.controller('DemoController', function DemoController($scope) {
-            $scope.disabled = false;
+            const themes = [{
+                css: '../artifacts/css/dx.light.css',
+                name: 'light'
+            }, {
+                css: '../artifacts/css/dx.material.orange.light.css',
+                name: 'material.orange.light'
+            }];
 
-            let dataGrid;
+            $scope.currentTheme = themes[0];
 
             $scope.buttonOptions = {
-                text: "toggle disabled",
-                onClick: () => {
-                    $scope.disabled = !$scope.disabled;
-                }
+                text: "Disabled button",
+                disabled: true
             }
 
-            $scope.dataGridOptions = {
-                dataSource: employees,
-                editing: {
-                    mode: "batch",
-                    allowUpdating: true,
-                    selectTextOnEditStart: true,
-                    startEditAction: "click"
-                },
-                toolbar: {
-                    items: [
-                        "saveButton",
-                        {
-                            name: "revertButton",
-                            location: "after",
-                        },
-                        {
-                            location: "before",
-                            widget: "dxSelectBox",
-                            options: {
-                                width: 200,
-                                items: [{
-                                    value: "CustomerStoreState",
-                                    text: "Grouping by State"
-                                }, {
-                                    value: "Employee",
-                                    text: "Grouping by Employee"
-                                }],
-                                displayExpr: "text",
-                                valueExpr: "value",
-                                value: "CustomerStoreState",
-                                disabled: $scope.disabled
-                            }
-                        }
-                    ]
-                },
+            $scope.buttonOptionsIcons = {
+                icon: "trash",
+                disabled: true
+            }
+
+            $scope.selectOptions = {
+                text: 'Choose theme',
+                items: themes,
+                value: themes[0],
+                displayExpr: "name",
                 bindingOptions: {
-                    "toolbar.items[2].options.disabled": "disabled"
+                    value: "currentTheme"
                 },
-                onInitialized: ({component}) => {
-                    window.grid = component;
-                }
             };
 
-            $scope.$watch("disabled", () => {
-                console.log($scope.disabled);
-            })
+            $scope.gridOptions = {
+                dataSource: employees,
+                keyExpr: "ID",
+                columns: [
+                    {
+                        type: "buttons",
+                        buttons: [{
+                            hint: "Clone",
+                            icon: "repeat",
+                            disabled: function(e) {
+                                return e.row.data.ID % 2 == 0;
+                            },
+                            onClick: function(e) {
+                                var clonedItem = $.extend({}, e.row.data, { ID: ++maxID });
+
+                                employees.splice(e.row.rowIndex, 0, clonedItem);
+                                e.component.refresh(true);
+                                e.event.preventDefault();
+                            }
+                        }]
+                    },
+                    {
+                        dataField: "Prefix",
+                        caption: "Title"
+                    },
+                    "FirstName",
+                    "LastName",
+                    {
+                        dataField: "Position",
+                        width: 130
+                    }, {
+                        dataField: "StateID",
+                        caption: "State",
+                        width: 125,
+                        lookup: {
+                            dataSource: states,
+                            displayExpr: "Name",
+                            valueExpr: "ID"
+                        }
+                    }, {
+                        dataField: "BirthDate",
+                        dataType: "date",
+                        width: 125
+                    }
+                ]
+            };
         });
     </script>
 </body>
