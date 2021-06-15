@@ -1,6 +1,6 @@
 /**
 * DevExtreme (esm/ui/pivot_grid/ui.pivot_grid.data_area.js)
-* Version: 21.1.3
+* Version: 21.2.0
 * Build date: Tue Jun 15 2021
 *
 * Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED

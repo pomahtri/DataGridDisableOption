@@ -1811,6 +1811,7 @@ var KeyboardNavigationController = _uiGrid_core.default.ViewController.inherit({
       type: 'input',
       target: $input.get(0)
     });
+    $input.get(0).select();
 
     _events_engine.default.trigger($input, keyDownEvent);
 

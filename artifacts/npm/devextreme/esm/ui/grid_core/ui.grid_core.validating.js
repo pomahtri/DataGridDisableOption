@@ -1,6 +1,6 @@
 /**
 * DevExtreme (esm/ui/grid_core/ui.grid_core.validating.js)
-* Version: 21.1.3
+* Version: 21.2.0
 * Build date: Tue Jun 15 2021
 *
 * Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
@@ -21,7 +21,7 @@ import Button from '../button';
 import pointerEvents from '../../events/pointer';
 import ValidationEngine from '../validation_engine';
 import Validator from '../validator';
-import Overlay from '../overlay';
+import { Overlay } from '../overlay';
 import errors from '../widget/ui.errors';
 import { Deferred, when, fromPromise } from '../../core/utils/deferred';
 import LoadIndicator from '../load_indicator';

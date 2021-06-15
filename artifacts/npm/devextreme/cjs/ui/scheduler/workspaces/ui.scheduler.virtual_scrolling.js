@@ -1,6 +1,6 @@
 /**
 * DevExtreme (cjs/ui/scheduler/workspaces/ui.scheduler.virtual_scrolling.js)
-* Version: 21.1.3
+* Version: 21.2.0
 * Build date: Tue Jun 15 2021
 *
 * Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
@@ -742,7 +742,7 @@ var Renderer = /*#__PURE__*/function () {
   };
 
   _proto5._renderGrid = function _renderGrid() {
-    this.workspace.renderRWorkspace(false);
+    this.workspace.renderWorkSpace(false);
   };
 
   _proto5._renderAppointments = function _renderAppointments() {

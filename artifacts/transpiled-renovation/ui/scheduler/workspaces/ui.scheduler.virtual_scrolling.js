@@ -734,7 +734,7 @@ var Renderer = /*#__PURE__*/function () {
   };
 
   _proto5._renderGrid = function _renderGrid() {
-    this.workspace.renderRWorkspace(false);
+    this.workspace.renderWorkSpace(false);
   };
 
   _proto5._renderAppointments = function _renderAppointments() {

@@ -1,6 +1,6 @@
 /**
 * DevExtreme (cjs/events/core/hook_touch_props.js)
-* Version: 21.1.3
+* Version: 21.2.0
 * Build date: Tue Jun 15 2021
 *
 * Copyright (c) 2012 - 2021 Developer Express Inc. ALL RIGHTS RESERVED
